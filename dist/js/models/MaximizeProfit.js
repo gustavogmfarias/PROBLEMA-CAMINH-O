@@ -3,11 +3,9 @@ import Vehicle from "./Vehicle.js";
 export default class MaximizeProfit {
     _productList;
     vehicle;
-    solution;
-    constructor(_productList = [], vehicle = new Vehicle(2000), solution = []) {
+    constructor(_productList = [], vehicle = new Vehicle(2000)) {
         this._productList = _productList;
         this.vehicle = vehicle;
-        this.solution = solution;
     }
     Maximize() {
         const productA = new Product(1, 400, 200);
@@ -26,7 +24,6 @@ export default class MaximizeProfit {
             // a must be equal to b
             return 0;
         });
-        this.solution = new Array(this._productList.length);
     }
     PrintProducts() {
         console.table(this._productList);
@@ -39,9 +36,8 @@ export default class MaximizeProfit {
         arrIndexOfProducts.map((item, index) => {
             if (item === 1) {
                 let product = this._productList[index];
-                let currentVehicleCapacity = this.vehicle.currentCapacity;
-                if (currentVehicleCapacity > product.weight &&
-                    currentVehicleCapacity - product.weight >= 0) {
+                if (this.vehicle.currentCapacity > product.weight &&
+                    this.vehicle.currentCapacity - product.weight >= 0) {
                     productsArray.push(product);
                     this.vehicle.insertProduct(product);
                     productArrayBin.push(item);
@@ -53,6 +49,8 @@ export default class MaximizeProfit {
             else {
                 productArrayBin.push(item);
             }
+            this.vehicle.totalWeight();
+            console.log("capacidade atual do veículo: ", this.vehicle.currentCapacity);
         });
         totalProfit = productsArray.reduce((acc, product) => {
             return (acc += product.profit);
