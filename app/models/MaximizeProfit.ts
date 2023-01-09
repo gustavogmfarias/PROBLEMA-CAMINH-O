@@ -38,6 +38,10 @@ export default class MaximizeProfit {
   Solution(arrIndexOfProducts: number[]) {
     //[1,0,1,1,1]
 
+    const productsArray: Product[] = [];
+    const productArrayBin: number[] = [];
+    let totalProfit: number;
+
     arrIndexOfProducts.map((item, index) => {
       if (item === 1) {
         let product = this._productList[index];
@@ -47,9 +51,24 @@ export default class MaximizeProfit {
           currentVehicleCapacity > product.weight &&
           currentVehicleCapacity - product.weight >= 0
         ) {
+          productsArray.push(product);
           this.vehicle.insertProduct(product);
+          productArrayBin.push(item);
+        } else {
+          productArrayBin.push(0);
         }
+      } else {
+        productArrayBin.push(item);
       }
     });
+
+    totalProfit = productsArray.reduce((acc, product) => {
+      return (acc += product.profit);
+    }, 0);
+
+    console.log("lucro total: ", totalProfit);
+    console.table(arrIndexOfProducts);
+    console.table(productsArray);
+    console.table(productArrayBin);
   }
 }

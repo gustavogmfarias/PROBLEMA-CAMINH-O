@@ -6,4 +6,4 @@ maximizeProfit.Maximize();
 
 maximizeProfit.PrintProducts();
 
-maximizeProfit.vehicle.totalWeight();
+maximizeProfit.Solution([1, 1, 1, 1, 1]);
