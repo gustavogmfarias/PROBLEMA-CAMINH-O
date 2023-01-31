@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node dist/js/main.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "compile": "tsc",
+    "compile": "node tsc",
     "watch": "node tsc -w"
   },
   "author": "",
