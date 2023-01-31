@@ -6,13 +6,13 @@
   "scripts": {
     "start": "node dist/js/main.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "compile": "node tsc",
-    "watch": "node tsc -w"
+    "compile": "tsc",
+    "watch": "tsc -w"
   },
   "author": "",
   "license": "ISC",
   "type": "module",
   "devDependencies": {
-    "typescript": "^4.9.4"
+    "typescript": "^4.9.5"
   }
 }

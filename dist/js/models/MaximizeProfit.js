@@ -2,9 +2,11 @@ import Product from "./Product.js";
 import Vehicle from "./Vehicle.js";
 export default class MaximizeProfit {
     _productList;
+    _productListOrdened;
     vehicle;
-    constructor(_productList = [], vehicle = new Vehicle(2000)) {
+    constructor(_productList = [], _productListOrdened = [], vehicle = new Vehicle(2000)) {
         this._productList = _productList;
+        this._productListOrdened = _productListOrdened;
         this.vehicle = vehicle;
     }
     Maximize() {
@@ -14,7 +16,8 @@ export default class MaximizeProfit {
         const productD = new Product(4, 900, 400);
         const productE = new Product(5, 600, 400);
         this._productList.push(productA, productB, productC, productD, productE);
-        this._productList.sort((a, b) => {
+        this._productListOrdened.push(productA, productB, productC, productD, productE);
+        this._productListOrdened.sort((a, b) => {
             if (a.profitPerWeight > b.profitPerWeight) {
                 return -1;
             }
@@ -35,15 +38,15 @@ export default class MaximizeProfit {
         let totalProfit;
         arrIndexOfProducts.map((item, index) => {
             if (item === 1) {
-                let product = this._productList[index];
+                let product = this._productListOrdened[index];
                 if (this.vehicle.currentCapacity > product.weight &&
                     this.vehicle.currentCapacity - product.weight >= 0) {
                     productsArray.push(product);
                     this.vehicle.insertProduct(product);
-                    productArrayBin.push(item);
+                    productArrayBin[product.id - 1] = 1;
                 }
                 else {
-                    productArrayBin.push(0);
+                    productArrayBin[product.id - 1] = 0;
                 }
             }
             else {
